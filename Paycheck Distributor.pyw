@@ -26,7 +26,7 @@ def payday():
     billslist = billsunsplit.split(", ")
     billnosum = map(float, billslist)
     bills = sum(billnosum)
-    other = ((float(paycheck)) - (float(credit)) - (float(savings)) - (float(foodbudget)))
+    other = ((float(paycheck)) - (float(bills)) - (float(credit)) - (float(savings)) - (float(foodbudget)))
 
     payout = Label(mw, text='Paycheck Amount: ' + str((float_round(float(paycheck), 2, round))))
     payout.grid(row=16, column=0, sticky=W)
