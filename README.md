@@ -18,4 +18,4 @@ If you wish to change your input:
 	
 	If you had values in the text file, and you wish to edit directly in the window, please reopen the program.
 	
-	If you did not have values in the text file, and wish to input them there, please do so and then reopen the program.
+	If you did not have values in the text file, and wish to input them there, please do so and then reopen PayDay.
