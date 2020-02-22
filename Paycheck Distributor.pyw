@@ -41,7 +41,6 @@ def inputmethods():
     credittxt = open('config.txt')
     credittxtlist = credittxt.readlines()[8]
     credittxt.close()
-    print(credittxtlist)
     if credittxtlist != '\n':
         credithave = Label(mw, text="Credit amounts have been set in the config.", bg='#B8B8B8')
         credithave.grid(row=5, sticky=W)
@@ -53,7 +52,6 @@ def inputmethods():
     billstxt = open('config.txt')
     billstxtlist = billstxt.readlines()[10]
     billstxt.close()
-    print(billstxtlist)
     if billstxtlist != '\n':
         billhave = Label(mw, text="Bill amounts have been set in the config.", bg='#B8B8B8')
         billhave.grid(row=7, sticky=W)
@@ -65,7 +63,6 @@ def inputmethods():
     savingstxt = open('config.txt')
     savingstxtlist = savingstxt.readlines()[12]
     savingstxt.close()
-    print(savingstxtlist)
     if savingstxtlist != '\n':
         savingshave = Label(mw, text="Savings amounts have been set in the config.", bg='#B8B8B8')
         savingshave.grid(row=9, sticky=W)
@@ -77,7 +74,6 @@ def inputmethods():
     grocerytxt = open('config.txt')
     grocerytxtlist = grocerytxt.readlines()[14]
     grocerytxt.close()
-    print(grocerytxtlist)
     if grocerytxtlist != '\n':
         groceryhave = Label(mw, text="Grocery amounts have been set in the config.", bg='#B8B8B8')
         groceryhave.grid(row=11, sticky=W)
