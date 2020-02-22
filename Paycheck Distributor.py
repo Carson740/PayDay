@@ -1,3 +1,4 @@
+import os
 from tkinter import *
 import tkinter as tk
 from math import ceil, floor
@@ -16,6 +17,10 @@ payask = Entry(mw)
 payask.grid(row=3, column=0, sticky=W)
 
 
+def openconfig():
+    os.startfile('config.txt')
+
+
 def remout():
     payoutrem = Label(mw, text='                                                                                       '
                                '     ', bg='#B8B8B8')
@@ -29,6 +34,8 @@ def remout():
                                    '     ', bg='#B8B8B8')
     otheroutrem = Label(mw, text='                                                                                     '
                                  '     ', bg='#B8B8B8')
+    blankspace = Label(mw, text='                                                                                      '
+                                '       ', bg='#B8B8B8')
 
     payoutrem.grid(row=16, column=0, sticky=W)
     creditoutrem.grid(row=17, column=0, sticky=W)
@@ -36,6 +43,8 @@ def remout():
     saveoutrem.grid(row=19, column=0, sticky=W)
     groceryoutrem.grid(row=20, column=0, sticky=W)
     otheroutrem.grid(row=21, column=0, sticky=W)
+    blankspace.grid(row=22, column=0, sticky=W)
+
 
 def inputmethods():
     credittxt = open('config.txt')
@@ -153,7 +162,6 @@ def payday():
     saveout = Label(mw, text='Savings Amount: ' + str((float_round(float(savings), 2, round))), bg='#B8B8B8')
     groceryout = Label(mw, text='Grocery/Food Budget: ' + str((float_round(float(grocery), 2, round))), bg='#B8B8B8')
     otherout = Label(mw, text='Other/Frivolous: ' + str((float_round(float(other), 2, round))), bg='#B8B8B8')
-    Label(mw, text='', bg='#B8B8B8').grid(row=22, column=0, sticky=W)
 
     payout.grid(row=16, column=0, sticky=W)
     creditout.grid(row=17, column=0, sticky=W)
@@ -162,7 +170,7 @@ def payday():
     groceryout.grid(row=20, column=0, sticky=W)
     otherout.grid(row=21, column=0, sticky=W)
 
-
+remout()
 inputmethods()
 Welcome = Label(mw, text="Welcome to PayDay!\n", font='none 18 bold', bg='#B8B8B8')
 Welcome.grid(row=0, column=0)
@@ -171,9 +179,11 @@ Warning.grid(row=1, column=0)
 
 Label(mw, text='Enter your paycheck amount: ', bg='#B8B8B8').grid(row=2, column=0, sticky=W)
 Label(mw, text='', bg='#B8B8B8').grid(row=12, column=0, sticky=W)
-button = Button(mw, text="Calculate", command=payday)
-button.grid(row=30, sticky=W)
-button = Button(mw, text="Remove Output", command=remout)
-button.grid(row=31, sticky=W)
+Calculate = Button(mw, text="Calculate", command=payday)
+Calculate.grid(row=30, sticky=W)
+RemoveOutput = Button(mw, text="Remove Output", command=remout)
+RemoveOutput.grid(row=31, sticky=W)
+OpenConfig = Button(mw, text="Open Config", command=openconfig)
+OpenConfig.grid(row=32, sticky=W)
 
 mw.mainloop()
