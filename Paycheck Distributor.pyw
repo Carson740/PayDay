@@ -1,7 +1,7 @@
 import os
 from tkinter import *
 import tkinter as tk
-from math import ceil, floor
+from math import floor
 
 
 def float_round(num, places=0, direction=floor):
@@ -19,6 +19,7 @@ creditask = Entry(mw)
 billask = Entry(mw)
 savingsask = Entry(mw)
 groceryask = Entry(mw)
+
 
 def openconfig():
     os.startfile('config.txt')
@@ -74,26 +75,26 @@ def inputmethods():
     savingstxtlist = savingstxt.readlines()[12]
     savingstxt.close()
     if savingstxtlist != '\n':
-        savingshave = Label(mw, text="Savings amounts have been set in the config.", bg='#B8B8B8')
+        savingshave = Label(mw, text="Savings percentage has been set in the config.", bg='#B8B8B8')
         savingshave.grid(row=9, sticky=W)
     elif savingstxtlist == '\n':
         savingsask.grid(row=9, sticky=W)
-        Label(mw, text='Enter your savings amount: ', bg='#B8B8B8').grid(row=8, column=0, sticky=W)
+        Label(mw, text='Enter your savings percentage: ', bg='#B8B8B8').grid(row=8, column=0, sticky=W)
 
     grocerytxt = open('config.txt')
     grocerytxtlist = grocerytxt.readlines()[14]
     grocerytxt.close()
     if grocerytxtlist != '\n':
-        groceryhave = Label(mw, text="Grocery amounts have been set in the config.", bg='#B8B8B8')
+        groceryhave = Label(mw, text="Grocery percentage has been set in the config.", bg='#B8B8B8')
         groceryhave.grid(row=11, sticky=W)
     elif grocerytxtlist == '\n':
         groceryask.grid(row=11, sticky=W)
-        Label(mw, text='Enter your grocery amount: ', bg='#B8B8B8').grid(row=10, column=0, sticky=W)
+        Label(mw, text='Enter your grocery percentage: ', bg='#B8B8B8').grid(row=10, column=0, sticky=W)
 
 
 def payday():
+    remout()
     payout = payask.get()
-    billsunsplitask = billask.get()
     if "$" in payout:
         payout = payout.replace('$', '')
     credittxt = open('config.txt')
@@ -143,49 +144,46 @@ def payday():
     savingstxt.close()
 
     if savingstxtlist != '\n':
-        if "$" in savingstxtlist:
-            savingstxtlist = savingstxtlist.replace('$', '')
-        savingsunsplit = str(savingstxtlist)
-        savingslist = savingsunsplit.split(", ")
-        savingsnosum = map(float, savingslist)
-        savings = sum(savingsnosum)
-    else:
-        savingsunsplit = savingsask.get()
-        if "$" in savingsunsplit:
-            savingsunsplit = savingsunsplit.replace('$', '')
+        if "%" in savingstxtlist:
+            savingstxtlist = savingstxtlist.replace('%', '')
+            savings = '.' + savingstxtlist
         else:
-            savingsunsplit = savingsunsplit
-        savingslist = savingsunsplit.split(", ")
-        savingsnosum = map(float, savingslist)
-        savings = sum(savingsnosum)
+            savings = '.' + savingstxtlist
+    else:
+        savingspercentraw = savingsask.get()
+        if "%" in savingspercentraw:
+            savingspercent = savingspercentraw.replace('%', '')
+        else:
+            savingspercent = savingspercentraw
+        savings = '.' + savingspercent
 
     grocerytxt = open('config.txt')
     grocerytxtlist = grocerytxt.readlines()[14]
     grocerytxt.close()
 
     if grocerytxtlist != '\n':
-        if "$" in grocerytxtlist:
-            grocerytxtlist = grocerytxtlist.replace('$', '')
-        groceryunsplit = str(grocerytxtlist)
-        grocerylist = groceryunsplit.split(", ")
-        grocerynosum = map(float, grocerylist)
-        grocery = sum(grocerynosum)
-    else:
-        groceryunsplit = groceryask.get()
-        if "$" in groceryunsplit:
-            groceryunsplit = groceryunsplit.replace('$', '')
+        if "%" in grocerytxtlist:
+            grocerytxtlist = grocerytxtlist.replace('%', '')
+            grocery = '.' + grocerytxtlist
         else:
-            groceryunsplit = groceryunsplit
-        grocerylist = groceryunsplit.split(", ")
-        grocerynosum = map(float, grocerylist)
-        grocery = sum(grocerynosum)
-
-    other = ((float(payout)) - (float(bills)) - (float(credit)) - (float(savings)) - (float(grocery)))
+            grocery = '.' + grocerytxtlist
+    else:
+        grocerypercentraw = groceryask.get()
+        if "%" in grocerypercentraw:
+            grocerypercent = grocerypercentraw.replace('%', '')
+        else:
+            grocerypercent = grocerypercentraw
+        grocery = '.' + grocerypercent
+        
+    payfinal = float(payout) - float(bills) - float(credit)
+    groceryfinal = payfinal*float(grocery)
+    savefinal = payfinal*float(savings)
+    other = ((float(payout)) - (float(bills)) - (float(credit)) - (float(savefinal)) - (float(groceryfinal)))
     payout = Label(mw, text='Paycheck Amount: ' + str((float_round(float(payout), 2, round))), bg='#B8B8B8')
     creditout = Label(mw, text='Credit Amount: ' + str((float_round(float(credit), 2, round))), bg='#B8B8B8')
     billsout = Label(mw, text='Bills Amount: ' + str((float_round(float(bills), 2, round))), bg='#B8B8B8')
-    saveout = Label(mw, text='Savings Amount: ' + str((float_round(float(savings), 2, round))), bg='#B8B8B8')
-    groceryout = Label(mw, text='Grocery/Food Budget: ' + str((float_round(float(grocery), 2, round))), bg='#B8B8B8')
+    saveout = Label(mw, text='Savings Amount: ' + str((float_round(float(savefinal), 2, round))), bg='#B8B8B8')
+    groceryout = Label(mw, text='Grocery/Food Budget: ' + str((float_round(float(groceryfinal), 2, round))), bg='#B8B8B8')
     otherout = Label(mw, text='Other/Frivolous: ' + str((float_round(float(other), 2, round))), bg='#B8B8B8')
 
     payout.grid(row=16, column=0, sticky=W)
@@ -207,8 +205,6 @@ Label(mw, text='Enter your paycheck amount: ', bg='#B8B8B8').grid(row=2, column=
 Label(mw, text='', bg='#B8B8B8').grid(row=12, column=0, sticky=W)
 Calculate = Button(mw, text="Calculate", command=payday)
 Calculate.grid(row=30, sticky=W)
-RemoveOutput = Button(mw, text="Remove Output", command=remout)
-RemoveOutput.grid(row=31, sticky=W)
 OpenConfig = Button(mw, text="Open Config", command=openconfig)
 OpenConfig.grid(row=32, sticky=W)
 

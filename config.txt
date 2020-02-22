@@ -14,3 +14,5 @@ Savings:
 Grocery:
 
 #Remember to save this file!
+#If a value was empty and you want input something, please relaunch PayDay after inputing your value(s), or put a 0 in desire field(s).
+#If a value was filled and you want to input from the GUI, please relaunch Payday after inputing your value(s).
