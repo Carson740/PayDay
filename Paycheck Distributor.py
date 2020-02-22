@@ -80,7 +80,7 @@ def inputmethods():
     elif grocerytxtlist == '\n':
         groceryask = Entry(mw)
         groceryask.grid(row=11, sticky=W)
-        Label(mw, text='Enter your Grocery amount: ', bg='#B8B8B8').grid(row=10, column=0, sticky=W)
+        Label(mw, text='Enter your grocery amount: ', bg='#B8B8B8').grid(row=10, column=0, sticky=W)
 
 
 def payday():
