@@ -1,0 +1,16 @@
+#These values will be used, rather than inputing in the GUI. Use this if your numbers are consistant
+#If you have more than one number to input, separate by commas and a space. 
+#Do not enter any currency symbols, or text. Only numeric values are valid
+#For example:
+#Bills:
+#250, 47.49, 25
+
+Credit:
+
+Bills:
+
+Savings:
+
+Grocery:
+
+#End
