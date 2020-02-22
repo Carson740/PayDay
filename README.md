@@ -16,6 +16,6 @@ If you wish to change your input:
 	
 	Press "Calculate" to receive your new results.
 	
-	If you had values in the text file, and you wish to edit directly in the window, please reopen the program.
+	If you had values in the text file, and you wish to edit directly in the window, please reopen Payday.
 	
 	If you did not have values in the text file, and wish to input them there, please do so and then reopen PayDay.
