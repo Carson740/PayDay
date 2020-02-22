@@ -10,10 +10,10 @@
 
 #If you wish to change your input:
 	
-# Change any values either in the input window, or in the config file.
+#Change any values either in the input window, or in the config file.
 	
-# Press "Calculate" to receive your new results.
+#Press "Calculate" to receive your new results.
 	
-# If you had values in the config, and you wish to edit directly in the window, remove values from config, then reopen Payday.
+#If you had values in the config, and you wish to edit directly in the window, remove values from config, then reopen Payday.
 	
-# If you did not have values in the config, and wish to input them there, do so and then reopen PayDay, or input a 0 in desired field(s)
+#If you did not have values in the config, and wish to input them there, do so and then reopen PayDay, or input a 0 in desired field(s)
