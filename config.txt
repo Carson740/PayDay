@@ -6,11 +6,11 @@
 #250, 47.49, 25
 
 Credit:
-23
+
 Bills:
-23
+
 Savings:
-500
+
 Grocery:
-23
+
 #Remember to save this file!

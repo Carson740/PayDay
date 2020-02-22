@@ -9,13 +9,16 @@ def float_round(num, places=0, direction=floor):
 
 
 mw = tk.Tk()
-mw.geometry("400x500")
+mw.geometry("400x600")
 mw.title("PayDay!")
 mw.configure(bg='#B8B8B8')
 
 payask = Entry(mw)
 payask.grid(row=3, column=0, sticky=W)
-
+creditask = Entry(mw)
+billask = Entry(mw)
+savingsask = Entry(mw)
+groceryask = Entry(mw)
 
 def openconfig():
     os.startfile('config.txt')
@@ -54,7 +57,6 @@ def inputmethods():
         credithave = Label(mw, text="Credit amounts have been set in the config.", bg='#B8B8B8')
         credithave.grid(row=5, sticky=W)
     elif credittxtlist == '\n':
-        creditask = Entry(mw)
         creditask.grid(row=5, sticky=W)
         Label(mw, text='Enter your credit payment amount: ', bg='#B8B8B8').grid(row=4, column=0, sticky=W)
 
@@ -65,7 +67,6 @@ def inputmethods():
         billhave = Label(mw, text="Bill amounts have been set in the config.", bg='#B8B8B8')
         billhave.grid(row=7, sticky=W)
     elif billstxtlist == '\n':
-        billask = Entry(mw)
         billask.grid(row=7, sticky=W)
         Label(mw, text='Enter any bills, separated by a comma: ', bg='#B8B8B8').grid(row=6, column=0, sticky=W)
 
@@ -76,7 +77,6 @@ def inputmethods():
         savingshave = Label(mw, text="Savings amounts have been set in the config.", bg='#B8B8B8')
         savingshave.grid(row=9, sticky=W)
     elif savingstxtlist == '\n':
-        savingsask = Entry(mw)
         savingsask.grid(row=9, sticky=W)
         Label(mw, text='Enter your savings amount: ', bg='#B8B8B8').grid(row=8, column=0, sticky=W)
 
@@ -87,25 +87,32 @@ def inputmethods():
         groceryhave = Label(mw, text="Grocery amounts have been set in the config.", bg='#B8B8B8')
         groceryhave.grid(row=11, sticky=W)
     elif grocerytxtlist == '\n':
-        groceryask = Entry(mw)
         groceryask.grid(row=11, sticky=W)
         Label(mw, text='Enter your grocery amount: ', bg='#B8B8B8').grid(row=10, column=0, sticky=W)
 
 
 def payday():
     payout = payask.get()
-    print(payout)
+    billsunsplitask = billask.get()
+    if "$" in payout:
+        payout = payout.replace('$', '')
     credittxt = open('config.txt')
     credittxtlist = credittxt.readlines()[8]
     credittxt.close()
 
     if credittxtlist != '\n':
+        if "$" in credittxtlist:
+            credittxtlist = credittxtlist.replace('$', '')
         creditunsplit = str(credittxtlist)
         creditlist = creditunsplit.split(", ")
         creditnosum = map(float, creditlist)
         credit = sum(creditnosum)
     else:
-        creditunsplit = creditask.get()
+        creditunsplitask = creditask.get()
+        if "$" in creditunsplitask:
+            creditunsplit = creditunsplitask.replace('$', '')
+        else:
+            creditunsplit = creditunsplitask
         creditlist = creditunsplit.split(", ")
         creditnosum = map(float, creditlist)
         credit = sum(creditnosum)
@@ -115,12 +122,18 @@ def payday():
     billstxt.close()
 
     if billstxtlist != '\n':
+        if "$" in billstxtlist:
+            billstxtlist = billstxtlist.replace('$', '')
         billsunsplit = str(billstxtlist)
         billslist = billsunsplit.split(", ")
         billnosum = map(float, billslist)
         bills = sum(billnosum)
     else:
-        billsunsplit = billask.get()
+        billsunsplitask = billask.get()
+        if "$" in billsunsplitask:
+            billsunsplit = billsunsplitask.replace('$', '')
+        else:
+            billsunsplit = billsunsplitask
         billslist = billsunsplit.split(", ")
         billnosum = map(float, billslist)
         bills = sum(billnosum)
@@ -130,12 +143,18 @@ def payday():
     savingstxt.close()
 
     if savingstxtlist != '\n':
+        if "$" in savingstxtlist:
+            savingstxtlist = savingstxtlist.replace('$', '')
         savingsunsplit = str(savingstxtlist)
         savingslist = savingsunsplit.split(", ")
         savingsnosum = map(float, savingslist)
         savings = sum(savingsnosum)
     else:
         savingsunsplit = savingsask.get()
+        if "$" in savingsunsplit:
+            savingsunsplit = savingsunsplit.replace('$', '')
+        else:
+            savingsunsplit = savingsunsplit
         savingslist = savingsunsplit.split(", ")
         savingsnosum = map(float, savingslist)
         savings = sum(savingsnosum)
@@ -145,12 +164,18 @@ def payday():
     grocerytxt.close()
 
     if grocerytxtlist != '\n':
+        if "$" in grocerytxtlist:
+            grocerytxtlist = grocerytxtlist.replace('$', '')
         groceryunsplit = str(grocerytxtlist)
         grocerylist = groceryunsplit.split(", ")
         grocerynosum = map(float, grocerylist)
         grocery = sum(grocerynosum)
     else:
         groceryunsplit = groceryask.get()
+        if "$" in groceryunsplit:
+            groceryunsplit = groceryunsplit.replace('$', '')
+        else:
+            groceryunsplit = groceryunsplit
         grocerylist = groceryunsplit.split(", ")
         grocerynosum = map(float, grocerylist)
         grocery = sum(grocerynosum)
@@ -169,6 +194,7 @@ def payday():
     saveout.grid(row=19, column=0, sticky=W)
     groceryout.grid(row=20, column=0, sticky=W)
     otherout.grid(row=21, column=0, sticky=W)
+
 
 remout()
 inputmethods()
