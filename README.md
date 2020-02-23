@@ -1,5 +1,5 @@
 # PayDay
-#Welcome to Payday!
+
 #Payday is a tool that makes it easy to see how much money you'll have left over after expenses.
 
 
