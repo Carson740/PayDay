@@ -99,7 +99,12 @@ def inputmethods():
 def payday():
     remout()
     payout = payask.get()
+    bills = '0'
+    credit = '0'
+    groceryfinal = '0'
+    savefinal = '0'
     payfinal = float(payout) - float(bills) - float(credit)
+
 
     if "$" in payout:
         payout = payout.replace('$', '')
@@ -203,10 +208,6 @@ def payday():
         elif savingspercentraw == '':
             savefinal = '0'
 
-    global credit
-    global bills
-    global groceryfinal
-    global savefinal
 
     payoutlabel = Label(mw, text='Paycheck Amount: $' + str((float_round(float(payout), 2, round))), bg='#B8B8B8')
     creditout = Label(mw, text='Credit Amount: $' + str((float_round(float(credit), 2, round))), bg='#B8B8B8')
