@@ -1,4 +1,4 @@
-#These values will be used, rather than inputing in the GUI. Use this if your numbers are consistant
+#These values will be used, rather than inputting in the GUI. Use this if your numbers are consistant
 #If you have more than one number to input, separate by commas and a space. 
 #Do not enter any currency symbols, or text. Only numeric values are valid
 #For example:
@@ -14,5 +14,5 @@ Savings:
 Grocery:
 
 #Remember to save this file!
-#If a value was empty and you want input something, please relaunch PayDay after inputing your value(s), or put a 0 in desire field(s).
-#If a value was filled and you want to input from the GUI, please relaunch Payday after inputing your value(s).
+#If a value was empty and you want input something, please relaunch PayDay after inputting your value(s), or put a 0 in desire field(s).
+#If a value was filled and you want to input from the GUI, please relaunch Payday after inputting your value(s).
